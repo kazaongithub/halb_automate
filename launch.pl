@@ -76,4 +76,4 @@ sub search_str
     return $found_flag;
 }
 
-&main();
+main();

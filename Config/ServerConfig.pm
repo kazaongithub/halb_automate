@@ -1,65 +1,54 @@
 package Config::ServerConfig;
 
-use strict;
-use warnings;
 use Exporter;
 
 our @ISA    = qw (Exporter);
 our @EXPORT = qw (
-    %host_common_info
-    %server_common_info
-    %server_info
+    $sdk_info
+    $server_common_info
+    $all_server_info
+    $source_server
     %client_common_info
     %client_info
 );
 
-# Common host information
-our %host_common_info = (
-        user_name   => 'root',
-        user_pswd   => 'a',
-        prompt      => '/[\$%#>] $/',
-);
+# sdk's information
+our $sdk_info = {
+    'pkgs_dir'   => '/home/n3fips-449/HALB_CLIENT_1/packages/new/',
+    'driver_sdk' => 'CNN35XX-NFBE-Linux-Driver-KVM-XEN-PF-SDK-2.0-88.tgz',
+    'server_sdk' => 'CNN35XX-NFBE-Cav-Server-2.0-48.tgz',
+    'pek_file'   => 'pek.key',
+};
 
 # Server common information
-our %server_common_info = (
-        sdk_path    => '/home/kaza/n3fips_2.0_release/cnn35xx-nfbe-kvm-xen-pf/software/apps/cnn35xx-nfbe-cav-server/bin',
-);
+our $server_common_info = {
+    'user_name'        => 'root',
+    'user_pswd'        => 'a',
+    'prompt'           => '/[\$%#>] $/',
+    'sdk_path'         => '/home/HALB',
+    'pkgs_dir'         => '/home/HALB/packages',
+    'sdk_dir'          => '/home/HALB/cnn35xx-nfbe-kvm-xen-pf',
+    'sdk_software'     => '/home/HALB/cnn35xx-nfbe-kvm-xen-pf/software',
+    'sdk_apps'         => '/home/HALB/cnn35xx-nfbe-kvm-xen-pf/software/apps',
+    'server_dir'       => '/home/HALB/cnn35xx-nfbe-kvm-xen-pf/software/apps/cnn35xx-nfbe-cav-server',
+    'server_pek_path'  => '/etc/cavium/nfbe0/',
+    'pek_path'         => '/etc/cavium/nfbe0/pek.key',
+};
+
+# Prefered server
+our $source_server = 'server_9';
 
 # Server's information
-our %server_info = (
-    'Server_1' => {
-        hsm_name    => 'HSM1',
-        ip_addr     => '192.168.190.231',
-        log_file    => 'server_1.log',
-        conf_file   => 'cav_server.conf',
+our $all_server_info = {
+
+    'server_1' => {
+        'hostname'        => '40.0.0.53',
+        'back_channel_ip' => '40.0.0.53',
+        'zone'            => 1,
+        'nodeid'          => 1,
+        'PARTITION'       => 'P1',
     },
 
-    #'Server_2' => {
-    #    hsm_name    => 'HSM2',
-    #    ip_addr     => '10.91.207.189',
-    #    log_file    => 'server_2.log',
-    #},
-);
+};
 
-# Client common information
-our %client_common_info = (
-        sdk_path    => '/home/kaza/cnn35xx-nfbe-cav-client/cav-client/bindist',
-);
-
-# Client information
-our %client_info = (
-    'Client_1' => {
-        hsm_name    => 'HSM1',
-        ip_addr     => '10.91.207.189',
-        log_file    => 'cleint_1.log',
-        conf_file   => 'cav_cli_daemon.cfg',
-    },
-
-    #'Server_2' => {
-    #    hsm_name    => 'HSM2',
-    #    ip_addr     => '10.91.207.189',
-    #    log_file    => 'server_2.log',
-    #},
-);
-
-
+1;

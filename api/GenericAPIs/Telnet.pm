@@ -67,7 +67,7 @@ sub open_pty
 		"-o", "NumberOfPasswordPrompts=1",
 		"-o", "StrictHostKeyChecking=no",
 		"-o", "UserKnownHostsFile=/dev/null",
-		$args{ip_addr}
+		$args{hostname}
 	);
 
 	# Create a Net::Telnet object to perform I/0 on ssh's tty
@@ -84,7 +84,7 @@ sub open_pty
 
 	# Wait for the password prompt and send password.
 	$ssh->waitfor(-match => '/password: ?$/i', -errmode => "return")
-		or die "problem connecting to \"$args{ip_addr}\": ", $ssh->lastline;
+		or die "problem connecting to \"$args{hostname}\": ", $ssh->lastline;
 
 	$ssh->print($args{user_pswd});
 
